@@ -1,0 +1,34 @@
+This package provides an easy way to perform interpolation of 1-D and 2-D datasets.
+
+1-D dataset is represented by two columns of numbers: X and Y, of the same length.
+X column should contain increasing sequence of numbers.
+It is not required that X data should form regular (evenly spaced) grid.
+X and Y columns of length 1 also form 1-D data (single data point).
+
+2-D dataset is represented by two columns of numbers: X and Y.
+and 2-dimensional matrix Z.
+Number of columns in Z matrix should be equal to length of X array,
+while number of rows to length of Y array.
+Lengths of X and Y data may differ. One or both of X and Y columns may
+contain single element - this is also valid 2-D dataset.
+X and Y column should contain increasing sequence of numbers.
+It is not required that X and Y data should form regular (evenly spaced) grid.
+
+Two types of interpolation are supported: linear and spline (3rd degree polynomials).
+
+Linear interpolation on 1-D dataset and on reduced 2-D datasets (where X or Y is single element column)
+is performed using `interp` method from `numpy` package.
+
+Spline interpolation on all datasets is performed using `InterpolatedUnivariateSpline` (for 1-D data)
+and `RectBivariateSpline` (for 2-D data) from `scipy` package.
+
+Cubic spline interpolation requires at least 4 data points. In case number of data points is lower,
+interpolator implemented in this package will fall back to quadratic spline (for 3 data points)
+or to linear interpolation (2 or less data points).
+This is different behaviour from what is implemented in `scipy` package where exception is thrown is such situation.
+
+Note: scipy package is not imported her as default as its installation is problematic for some group of users
+(i.e. Windows users working without Anaconda python distribution).
+Most of the functionality of this package (i.e. 1-D and some cases of 2-D linear interpolation) will work without
+scipy package installed. If user without scipy package calls cubic spline interpolation method then an exception
+will be thrown and an error message printed, requesting user to install scipy.
