@@ -1,7 +1,4 @@
 
-"""
-TODO: documentation here.
-"""
 import gzip
 import hashlib
 import logging
